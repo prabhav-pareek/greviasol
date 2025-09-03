@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Industrial Lubricants & Specialty Chemicals — Grevia Solutions</title>
+  <meta name="description" content="Supply of industrial lubricants and speciality chemicals: hydraulic oils, gear oils, compressor oils, greases, metalworking fluids, corrosion inhibitors and more. Technical guidance, grades, selection and testing." />
+  <style>
+    /* ---------------- Theme variables ---------------- */
+    :root{
+      --bg:#ffffff;
+      --surface:#f6f7f9;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#606a7a;
+      --line:#e6e8ec;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.07);
+      --brand:#111827; /* charcoal accent */
+      --container:1180px;
+      --transition:.22s;
+    }
+    html[data-theme="dark"]{
+      --bg:#121213;
+      --surface:#1b1b1c;
+      --card:#232326;
+      --text:#e6ebf2;
+      --muted:#9aa6b2;
+      --line:#2f3134;
+      --shadow:0 8px 24px rgba(0,0,0,.55);
+      --brand:#e6ebf2;
+    }
+
+    /* ---------------- Base ---------------- */
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.6}
+    a{color:inherit}
+    img{display:block;max-width:100%;height:auto}
+    .wrap{max-width:var(--container);margin:0 auto;padding:22px}
+
+    h1{font-size:1.9rem;margin:0 0 8px}
+    h2{font-size:1.25rem;margin:0 0 10px}
+    h3{font-size:1.02rem;margin:0 0 6px}
+    p{margin:0 0 12px;color:var(--muted)}
+
+    /* ---------------- Topbar (frosted glass) ---------------- */
+    .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+html[data-theme="dark"] .topbar {
+  background: rgba(18, 18, 18, 0.7); /* Dark mode frosted glass */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  text-decoration: none;   /* Remove underline */
+  color: inherit;          /* Keep same color as parent */
+  font-weight: 700;        /* Maintain bold styling */
+}
+
+.brand img {
+  height: 28px;
+  width: auto;
+}
+
+.menu {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.menu a {
+  padding: 8px 6px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;   /* remove underline */
+}
+
+.menu a:hover {
+  background: var(--surface);
+}
+
+.hamb {
+  display: none;
+  border: 0;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.toggle {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Theme icons */
+#iconSun { display: block; }
+#iconMoon { display: none; }
+html[data-theme="dark"] #iconSun { display: none; }
+html[data-theme="dark"] #iconMoon { display: block; }
+
+
+@media (max-width: 980px) {
+  .menu {
+    display: none;
+    position: absolute;
+    right: 16px;
+    top: 64px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+  }
+  .hamb {
+    display: block;
+  }
+}
+
+    /* ====== Layout helpers ====== */
+    .section{border-top:1px solid var(--line);padding:28px 0;margin-top:10px}
+    .split{display:grid;grid-template-columns:6fr 6fr;gap:26px;align-items:center}
+    @media(max-width:980px){.split{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface);font-size:.85rem;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .span-6{grid-column:span 6}
+    .span-4{grid-column:span 4}
+    .span-12{grid-column:span 12}
+    @media(max-width:980px){.span-6,.span-4{grid-column:span 12}}
+    .grid-12 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* consistent spacing */
+}
+@media (max-width: 980px) {
+  .grid-12 {
+    grid-template-columns: 1fr;
+  }
+}
+
+    .muted{color:var(--muted)}
+
+    /* Image cards for sectors (placeholders) */
+    .sector{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+    .sector .thumb{height:140px;background:#dbe1e8}
+    .sector .body{padding:12px}
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse;border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
+    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left}
+    th{background:var(--surface);color:var(--text)}
+
+    /* Buttons */
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font-weight:600}
+    .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
+    html[data-theme="dark"] .btn.primary{background:#fff;color:#000}
+
+    /* Small diagram blocks (text-only schematic) */
+    .diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:12px}
+    .box{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-align:center}
+    .arrow{font-weight:700;opacity:.6}
+    /* image helper */
+    .hero-img{width:100%;height:320px;object-fit:cover;border-radius:10px}
+    .sector-thumb{height:120px;background:#e8edf3;border-radius:8px;overflow:hidden;background-size:cover;background-position:center}
+
+    /* ---------------- Tables ---------------- */
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;margin-top:10px;background:var(--card);border-radius:10px;overflow:hidden}
+    thead th{background:var(--surface);text-align:left;padding:12px;font-weight:700;border-bottom:1px solid var(--line)}
+    tbody td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+    tbody tr:nth-child(even){background:rgba(0,0,0,0.02)}
+    html[data-theme="dark"] tbody tr:nth-child(even){background:rgba(255,255,255,0.012)}
+
+    /* ---------------- Buttons ---------------- */
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font-weight:700}
+    .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
+    html[data-theme="dark"] .btn.primary{background:#fff;color:#000}
+
+    /* small diagram block */
+    .diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:12px}
+    .box{padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);text-align:center;color:var(--muted)}
+
+    /* small helpers */
+    .note{font-size:.95rem;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="topbar" role="banner">
+    <div class="nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="../index.html">
+        <!-- logo placeholder - replace with your PNG -->
+        <img src="../assets/img/grevialogo.png" alt="Company Logo" />
+        <span class="company-name" onclick="location.reload()" style="cursor:pointer;">Grevia Solutions</span>
+      </a>
+
+      <button class="hamb" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <ul class="menu" id="siteMenu" role="menubar">
+        <li role="none"><a role="menuitem" href="../index.html#what">What we do</a></li>
+        <li role="none"><a role="menuitem" href="../index.html#products">Products</a></li>
+        <li role="none"><a role="menuitem" href="index.html#projects">Projects</a></li>
+        <li role="none"><a role="menuitem" href="index.html#careers">Careers</a></li>
+        <li role="none"><a role="menuitem" href="../contact.html">Contact</a></li>
+      </ul>
+
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme" aria-pressed="false" title="Toggle theme">
+        <!-- Sun icon -->
+        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+        <!-- Moon icon -->
+        <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="wrap" id="content">
+    <!-- Intro split -->
+    <section class="section" aria-labelledby="introHead">
+      <div class="split">
+        <div>
+          <h1 id="introHead">Industrial Lubricants & Specialty Chemicals</h1>
+          <p class="muted">Comprehensive supply and technical support for industrial lubricants and speciality chemical solutions — from viscosity selection and approvals to storage, testing and responsible disposal. We focus on matching product specification to duty, not on marketing slogans.</p>
+
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <span class="chip">Hydraulic Oils</span>
+            <span class="chip">Gear Oils</span>
+            <span class="chip">Compressor Oils</span>
+            <span class="chip">Greases (NLGI)</span>
+            <span class="chip">Metalworking Fluids</span>
+            <span class="chip">Specialty Chemicals</span>
+          </div>
+        </div>
+
+        <div class="card" aria-hidden="true">
+          <img src="../assets/img/industriallubricants.png" alt="Industrial lubricants" class="hero-img" />
+          <p class="muted" style="margin-top:10px">Lubricants image</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is -->
+    <section class="section" aria-labelledby="whatHead">
+      <h2 id="whatHead">What are industrial lubricants & speciality chemicals?</h2>
+      <p>Industrial lubricants are formulated fluids and greases used to reduce friction, wear and heat in machines and systems. They include hydraulic fluids, compressor oils, turbine oils, gear oils, heat-transfer oils and greases. Specialty chemicals are performance additives and treatment agents used alongside or within lubrication systems — corrosion and scale inhibitors, biocides, defoamers, metalworking additives and more.</p>
+      <p>Suppliers must provide technical data (TDS), safety data (SDS), recommended maintenance intervals, and evidence of conformity where required (NSF H1 for food contact, OEM approvals, etc.).</p>
+    </section>
+
+    <!-- Types of lubricants (DETAILED) -->
+    <section class="section" aria-labelledby="typesHead">
+      <h2 id="typesHead">Types — what they are and how they're used</h2>
+
+      <div style="margin-top:10px">
+        <h3>Hydraulic oils</h3>
+        <p class="muted">Purpose: transmit power and lubricate hydraulic components (pumps, valves, actuators). Typical base oils: mineral (paraffinic), PAO (synthetic) and biodegradable esters for sensitive applications. Key properties: ISO VG viscosity (matching shear and temperature), anti-wear additives (ZDDP or ashless AW), oxidation stability, water separation (demulsibility), and anti-foam.</p>
+        <p class="muted">Selection notes: choose viscosity to maintain film thickness at operating temperature and to limit viscous losses at cold starts. For systems with long life requirements, prioritize oxidation-stable fluids and condition monitoring (particle counts, moisture, viscosity, TAN).</p>
+
+        <h3 style="margin-top:10px">Gear oils</h3>
+        <p class="muted">Purpose: protect gear teeth under sliding/rolling contact and heavy loads. Formulations include EP (extreme pressure) additives (sulphur-phosphorus), anti-wear, rust inhibitors and friction modifiers. Gear oils are specified by viscosity classes (ISO VG or SAE) and service categories such as API GL-4 / GL-5 for automotive/industrial gears.</p>
+        <p class="muted">Use-case differences: open gearing or enclosed gearboxes may favor different additive balances—high EP for heavily loaded enclosed gears, lower friction grades for synchronized transmissions.</p>
+
+        <h3 style="margin-top:10px">Compressor & turbine oils</h3>
+        <p class="muted">Compressor oils (rotary screw, reciprocating) must resist foaming, varnish, and deposit formation while providing bearing and gear protection. Turbine oils require excellent oxidation stability, low volatility, anti-foam and reliable water separation. Typical tests: RPVOT (rotary pressure vessel oxidation test), FZG or gear-scuffing for gear drives, and centrifugal separation for contaminants.</p>
+
+        <h3 style="margin-top:10px">Heat transfer & thermal oils</h3>
+        <p class="muted">Used in closed-loop heating systems (thermal oil heaters), these oils must retain fluidity at low temperature, resist thermal cracking at high temperatures, and have low vapour pressure. Selection focuses on maximum service temperature and expected lifetime (calc via thermal-oxidative stability tests).</p>
+
+        <h3 style="margin-top:10px">Metalworking fluids (cutting fluids & coolants)</h3>
+        <p class="muted">Covers straight oils, soluble oils (emulsions), and synthetic or semi-synthetic coolants. Functions: cooling, lubrication, corrosion protection, wash-off of chips, and chip evacuation. Formulation includes extreme-pressure additives for severe cutting, biocides for microbial control in soluble oils, and corrosion inhibitors for post-process protection. Emulsion stability, tramp oil control and bacterial management are essential operations concerns.</p>
+
+        <h3 style="margin-top:10px">Greases (NLGI grades)</h3>
+        <p class="muted">Grease is a thickened lubricating oil for bearings and slow-moving interfaces. The NLGI grade (000 to 6) describes consistency — NLGI 2 is the common general-purpose grade for roller and ball bearings. Grease selection considers base oil viscosity, thickener type (lithium complex, calcium sulfonate, polyurea), and additives (EP, anti-corrosion).</p>
+
+        <h3 style="margin-top:10px">Food-grade lubricants</h3>
+        <p class="muted">NSF H1 and ISO 21469 certified products are required where incidental food contact is possible. These use approved base oils and additive packages and typically have different odor and taste screening to avoid contamination.</p>
+      </div>
+    </section>
+
+    <!-- Specialty chemicals -->
+    <section class="section" aria-labelledby="specChemHead">
+      <h2 id="specChemHead">Specialty chemicals — categories and applications</h2>
+      <p class="muted">Specialty chemicals complement lubricants or treat systems directly. Below are common classes and practical notes.</p>
+
+      <div class="grid-12" style="margin-top:10px">
+        <div class="col-4 card">
+          <h3>Corrosion & scale inhibitors</h3>
+          <p class="muted">Used in cooling and process waters; they form protective films, chelate hardness ions, or adjust pH to reduce scaling. Selection depends on feedwater chemistry and permitted treatment chemistries.</p>
+        </div>
+
+        <div class="col-4 card">
+          <h3>Biocides & microbial control</h3>
+          <p class="muted">Control bacteria and fungi in water-based systems (coolants and waste streams). Use responsibly with safety and environmental controls; consider non-oxidizing biocides for long-lived systems.</p>
+        </div>
+
+        <div class="col-4 card">
+          <h3>Anti-foam / defoamers</h3>
+          <p class="muted">Silicone or non-silicone defoamers reduce foam in emulsions and process tanks—important where air entrainment reduces heat transfer or causes overflow.</p>
+        </div>
+
+        <div class="col-4 card" style="margin-top:12px">
+          <h3>Metalworking additives</h3>
+          <p class="muted">Additives for cutting oils and coolants—extreme-pressure compounds, lubricity improvers, antioxidants, and anti-wear agents—to increase tool life and surface finish.</p>
+        </div>
+
+        <div class="col-4 card" style="margin-top:12px">
+          <h3>Cleaning & degreasing agents</h3>
+          <p class="muted">Solvent or aqueous degreasers for pre-treatment. Choose based on substrate compatibility and environmental/safety regulations.</p>
+        </div>
+
+        <div class="col-4 card" style="margin-top:12px">
+          <h3>Product-specific blends</h3>
+          <p class="muted">Custom formulations for specific OEM needs: anti-wear hydraulic blends, bio-based lubricants, or low-VOC cleaners. We can co-develop where volume or regulatory constraints justify it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Viscosity Grade table -->
+    <section class="section" aria-labelledby="vgHead">
+      <h2 id="vgHead">Viscosity grade (ISO VG) reference</h2>
+      <p class="muted">ISO VG class describes nominal kinematic viscosity at 40 °C (centistokes). Use the table below as a guideline — final selection must be verified against OEM instructions and temperature-dependent viscosity requirements.</p>
+
+      <div class="table-wrap">
+        <table aria-describedby="vgHead">
+          <thead>
+            <tr><th>ISO VG</th><th>Nominal kinematic viscosity @40 °C (cSt)</th><th>Typical applications</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>VG 22–32</td><td>~22–32</td><td>Low-viscosity hydraulic systems, instrument oil, some compressors</td></tr>
+            <tr><td>VG 46</td><td>~46</td><td>General hydraulic systems, light gearboxes, general industrial service</td></tr>
+            <tr><td>VG 68</td><td>~68</td><td>Hydraulics subject to higher temperatures, bearings, some compressors</td></tr>
+            <tr><td>VG 100</td><td>~100</td><td>Gearboxes, heavy hydraulics, industrial gear oils</td></tr>
+            <tr><td>VG 150–220</td><td>~150–220</td><td>High-load gearboxes, circulating oil systems, bearings operating at high temperatures</td></tr>
+            <tr><td>VG 320+</td><td>>320</td><td>High viscosity circulation systems, sliding ways, heavy machinery</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="note">Note: ISO VG is a nominal measure; viscosity at operating temperature and viscosity index (VI) are critical for proper film thickness. For cold-start performance consider viscosity-temperature curves and low-temperature pumpability.</p>
+    </section>
+
+    <!-- Grease table -->
+    <section class="section" aria-labelledby="greaseHead">
+      <h2 id="greaseHead">Grease NLGI grading (quick reference)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>NLGI Grade</th><th>Consistency</th><th>Typical use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>NLGI 000–00</td><td>Very soft</td><td>Centralized lubrication, low temperature</td></tr>
+            <tr><td>NLGI 0–1</td><td>Flowable</td><td>Enclosed gearboxes, some circulation systems</td></tr>
+            <tr><td>NLGI 2</td><td>General purpose</td><td>Rolling & plain bearings — most common industrial grade</td></tr>
+            <tr><td>NLGI 3–4</td><td>Firm</td><td>Slow-moving bearings, heavy shock loads</td></tr>
+            <tr><td>NLGI 5–6</td><td>Very firm</td><td>Specialty applications — limited general industrial use</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Selection guidelines -->
+    <section class="section" aria-labelledby="selectHead">
+      <h2 id="selectHead">Selection & specification checklist (practical)</h2>
+      <p class="muted">When you request a quote, provide the following to get an accurate recommendation and quotation:</p>
+      <ul class="muted" style="margin-top:8px;padding-left:18px">
+        <li>Operating temperatures (min / max) and ambient temperature range.</li>
+        <li>Duty cycle and continuous vs intermittent loads.</li>
+        <li>Required viscosity at operating temperature (or ISO VG target).</li>
+        <li>Contaminant expectations (water ingress, dust) and filtration arrangements.</li>
+        <li>Compatibility with seals and materials (elastomers, paint, etc.).</li>
+        <li>Regulatory constraints (NSF H1, food contact, biodegradability, REACH).</li>
+        <li>Preferred base oil type (mineral / synthetic / PAO / ester) and desired service life.</li>
+      </ul>
+      <p class="note">We can perform a heat balance / viscosity calculation and propose a lubricant or custom blend when you supply process data and nominal operating points.</p>
+    </section>
+
+    <!-- Testing & QA -->
+    <section class="section" aria-labelledby="qaHead">
+      <h2 id="qaHead">Quality assurance & routine testing</h2>
+      <p class="muted">Our supply includes a Technical Data Sheet (TDS) and Safety Data Sheet (SDS). For in-service monitoring we recommend periodic testing to track oil condition and wear:</p>
+      <ul class="muted" style="margin-top:8px;padding-left:18px">
+        <li>Viscosity @40°C and @100°C (confirm no thermal breakdown).</li>
+        <li>TAN (total acid number) and TBN (for alkaline reserve in engine oils).</li>
+        <li>Water content (Karl Fischer) and particle count (ISO 4406/AS4059).</li>
+        <li>Elemental analysis (ICP) to track wear metals and contamination.</li>
+        <li>FTIR or RPVOT for oxidation and varnish precursor assessment.</li>
+      </ul>
+    </section>
+
+    <!-- Storage, packaging, safety -->
+    <section class="section" aria-labelledby="packHead">
+      <h2 id="packHead">Packaging, storage & safety</h2>
+      <p class="muted">Standard pack sizes: 200 L drums, 20/25 L pails, 1000 L IBCs. Store in a cool, dry place away from direct sunlight, with seals on drums to avoid moisture ingress. Follow SDS for handling, eye/skin protection and spill response. For food-grade products ensure dedicated storage and clean transfer lines to avoid cross-contamination.</p>
+    </section>
+
+    <!-- Regulatory & sustainability -->
+    <section class="section" aria-labelledby="regHead">
+      <h2 id="regHead">Regulatory & sustainability considerations</h2>
+      <p class="muted">We supply biodegradable and low-VOC formulations where required and can advise on REACH-related supply constraints. For sensitive applications we provide documented evidence of approvals (NSF, OEM) and end-of-life disposal guidance.</p>
+    </section>
+
+    <!-- Brochure and CTA -->
+    <section class="section" aria-labelledby="broHead">
+      <h2 id="broHead">Download technical brochure / Request sample</h2>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a class="btn primary" href="assets/brochures/industrial-lubricants.pdf" target="_blank" rel="noopener noreferrer">Download brochure (PDF)</a>
+        <a class="btn" href="../contact.html" rel="noopener noreferrer">Contact an expert</a>
+      </div>
+
+      <p class="note" style="margin-top:10px">We provide TDS, SDS, and sample dispatch for evaluation under your standard test protocol (filtration rate, wear tests, viscosity change).</p>
+    </section>
+  </main>
+
+  <footer class="topbar" style="border-top:1px solid var(--line);margin-top:20px">
+    <div class="wrap" style="text-align:center;font-size:.9rem;color:var(--muted);padding:12px 0">
+      &copy; 2025 Grevia Solutions. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // ------------- Theme toggle & nav toggle -------------
+    (function(){
+      const root = document.documentElement;
+      const THEME_KEY = 'grevia-theme';
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved) root.setAttribute('data-theme', saved);
+
+      // Theme toggle
+      const themeBtn = document.getElementById('themeToggle');
+      function updateThemeUI(theme){
+        themeBtn.setAttribute('aria-pressed', String(theme === 'dark'));
+        themeBtn.title = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+      }
+      // init
+      updateThemeUI(root.getAttribute('data-theme') || 'light');
+
+      themeBtn.addEventListener('click', ()=>{
+        const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', cur);
+        localStorage.setItem(THEME_KEY, cur);
+        updateThemeUI(cur);
+      });
+
+      // Mobile nav toggle
+      const navToggle = document.getElementById('navToggle');
+      const siteMenu = document.getElementById('siteMenu');
+      navToggle?.addEventListener('click', ()=>{
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        siteMenu.style.display = expanded ? 'none' : 'flex';
+      });
+
+      // close mobile menu on resize > breakpoint
+      window.addEventListener('resize', ()=>{
+        if(window.innerWidth > 980){
+          siteMenu.style.display = 'flex';
+          navToggle?.setAttribute('aria-expanded','false');
+        } else {
+          siteMenu.style.display = 'none';
+        }
+      });
+      // set initial menu visibility consistent with width
+      if(window.innerWidth > 980) siteMenu.style.display = 'flex';
+      else siteMenu.style.display = 'none';
+    })();
+  </script>
+</body>
+</html>

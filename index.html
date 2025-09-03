@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grevia Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+  --bg:#ffffff;
+  --surface:#f6f7f9;
+  --card:#ffffff;
+  --text:#0b1220;         /* near-slate-900 */
+  --muted:#606a7a;        /* slate-500/600 */
+  --line:#e6e8ec;         /* slate-200 */
+  --shadow:0 10px 30px rgba(0,0,0,.07);
+  --radius:14px;
+  --accent:#444444;       /* generic accent / neutral */
+  --transition:0.3s;
+
+  /* product-driven accents */
+  --blue:#1260d6;     /* chemicals / cold */
+  --red:#d12a2a;      /* heat */
+  --grey:#6b7280;     /* saw / cnc */
+  --charcoal:#111827; /* lubricants / graphite */
+  --green:#0d8f4b;    /* consultation / carbon */
+  --amber:#f59e0b;    /* badges */
+}
+
+html[data-theme="dark"] {
+  --bg:#121213;
+  --surface:#1b1b1c;
+  --card:#303133;
+  --text:#e6ebf2;
+  --muted:#9aa6b2;
+  --line:#2f3134;
+  --shadow:0 8px 24px rgba(0,0,0,.55);
+  --accent:#888888;   /* lighter neutral for dark mode */
+}
+
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* --- layout helpers --- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  section{padding:56px 0}
+  h1,h2,h3,h4{margin:0}
+  .sub{color:var(--muted)}
+  .btn{display:inline-flex;gap:8px;align-items:center;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#111;text-decoration:none;font-weight:700;box-shadow:var(--shadow)}
+  html[data-theme="dark"] .btn{background:#0e141b;color:var(--text)}
+  /* Default (light theme) */
+.btn.primary {
+  background: var(--charcoal);
+  color: #fff; /* white text on dark charcoal */
+  border: 1px solid transparent;
+  transition: background var(--transition), color var(--transition);
+}
+
+html[data-theme="dark"] .btn.primary {
+  background: var(--accent);   /* lighter button in dark mode */
+  color: var(--charcoal);    /* dark text inside */
+  border: 1px solid var(--line);
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+}
+
+  .btn.ghost{background:transparent;color:var(--text)}
+  .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:12px}
+
+  /* --- NAVBAR --- */
+  .navbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:saturate(160%) blur(6px);border-bottom:1px solid var(--line)}
+  html[data-theme="dark"] .navbar{background:rgba(11,15,20,.7)}
+  .nav_inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+  .brand img{width:28px;height:28px;object-fit:contain}
+  .brand .name{letter-spacing:.2px}
+  .navlinks{display:flex;align-items:center;gap:22px}
+  .navlinks a{text-decoration:none;opacity:.92}
+  .navlinks a:hover,.navlinks a.active{opacity:1}
+  .menu-group{display:flex;align-items:center;gap:22px}
+  .dropdown{position:relative}
+  .dropdown > a{display:inline-flex;align-items:center;gap:6px}
+  .drop{position:absolute;top:110%;left:0;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px 0;min-width:260px;display:none}
+  .drop a{display:block;padding:10px 14px;text-decoration:none}
+  .dropdown:hover .drop{display:block}
+  .hamb{display:none;cursor:pointer;font-size:26px}
+  .toggle{display:flex;align-items:center;gap:10px}
+  .icon{width:18px;height:18px;display:inline-block;vertical-align:middle}
+
+  @media(max-width:900px){
+    .navlinks{display:none;position:absolute;right:18px;top:64px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+    .navlinks.open{display:flex}
+    .hamb{display:block}
+    .dropdown:hover .drop{display:none} /* avoid accidental open on touch */
+    .dropdown .drop{position:static;display:block;border:none;box-shadow:none;padding:0}
+  }
+
+  /* --- HERO --- */
+  /* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden; /* prevent overflow from ::before scaling */
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dark overlay */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;   /* ✅ ensures it's horizontally centered */
+}
+
+
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-top: 15px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+  .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/img/hero-bg.jpg'); /* ✅ correct relative path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02); /* slight zoom effect */
+  z-index: 0;
+}
+  .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.35), rgba(0,0,0,.45));
+  pointer-events: none;
+  z-index: 1;
+}
+  .hero .wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* ✅ center text horizontally */
+  justify-content: center; /* ✅ center vertically */
+  text-align: center;
+}
+
+  .hero h1{font-size:clamp(28px,4.2vw,46px);line-height:1.15;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+  .hero p{max-width:820px;margin:12px 0 24px;color:#f2f4f7;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .hero .actions{display:flex;gap:10px;flex-wrap:wrap}
+
+  /* Hero Buttons */
+.hero-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: #111;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #111;
+  padding: 12px 24px;
+  border: 2px solid #111;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #111;
+  color: #fff;
+}
+
+  /* --- WHAT WE DO --- */
+  .grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.cards {
+  grid-column: span 8;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.w-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  transition: transform .2s ease;
+}
+.w-card:hover { transform: translateY(-3px); }
+
+.w-card p { color: var(--muted); margin: 8px 0 0; }
+
+.what-img {
+  grid-column: span 4;              /* right side width = 1/3 of section */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.what-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                /* fill the area */
+  aspect-ratio: 4 / 5;              /* adjust ratio (taller box) */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Coming Soon Overlay */
+.p-card.coming-soon {
+  position: relative;
+  pointer-events: none; /* disable clicks */
+}
+
+.p-card.coming-soon .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px) saturate(160%);
+  background: rgba(0,0,0,0.35); /* semi-transparent */
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+}
+
+/* Responsive adjustments */
+@media(max-width: 980px) {
+  .cards { grid-column: span 12; grid-template-columns: 1fr; }
+  .what-img { grid-column: span 12; margin-top: 20px; }
+}
+
+  
+  /* --- ABOUT --- */
+  .about .lead{color:var(--muted);max-width:920px;margin-top:8px}
+  .directors{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:18px}
+  .d-card{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+  .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;margin-bottom:10px;background:#d1d5db}
+  .d-card h4{margin:2px 0 2px}
+  .d-card .qual{font-weight:700;color:var(--muted);font-size:14px;margin-bottom:6px}
+  .d-card p{color:var(--muted);font-size:14px;margin:0}
+  @media(max-width:980px){.d-card{grid-column:span 6}}
+  @media(max-width:620px){.d-card{grid-column:span 12}}
+
+  /* --- PRODUCTS (horizontal rail) --- */
+  .row-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+  .hint{color:var(--muted);font-size:14px}
+  .hscroll{position:relative;margin-top:16px}
+  .rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .rail::-webkit-scrollbar{height:10px}
+  .rail::-webkit-scrollbar-thumb{background:#cfd6de;border-radius:999px}
+  html[data-theme="dark"] .rail::-webkit-scrollbar-thumb{background:#2a3643}
+  .p-card{min-width:320px;max-width:340px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .p-img{height:170px;background:#e5e7eb;object-fit:cover;width:100%}
+  .p-body{padding:14px}
+  .p-body h4{margin:0 0 6px}
+  .p-body p{margin:0 0 12px;color:var(--muted)}
+  .p-cta{display:flex;justify-content:space-between;align-items:center}
+  .p-cta .btn-mini{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:transparent;font-weight:700}
+  .flag{padding:4px 8px;border-radius:8px;font-weight:800;font-size:12px}
+  .flag.blue{background:rgba(18,96,214,.12);color:var(--blue)}
+  .flag.red{background:rgba(209,42,42,.12);color:var(--red)}
+  .flag.grey{background:rgba(107,114,128,.15);color:#000000}
+  .flag.charcoal{background:rgba(17,24,39,.12);color:var(--charcoal)}
+  .flag.green{background:rgba(13,143,75,.12);color:var(--green)}
+  .arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    border:1px solid var(--line);background:var(--card);
+    border-radius:10px;box-shadow:var(--shadow);padding:10px 12px;font-weight:900;cursor:pointer
+  }
+  .arrow[disabled]{opacity:.35;cursor:not-allowed}
+  .arrow.left{left:-6px}
+  .arrow.right{right:-6px}
+  @media(max-width:1240px){.arrow.left{left:6px}.arrow.right{right:6px}}
+   
+  /* --- PROJECTS / CAREERS / CONTACT --- */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .center{display:grid;place-items:center;text-align:center}
+  .career-box{border:1px dashed var(--line);border-radius:14px;padding:22px;background:var(--surface)}
+  .contact-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .contact-grid .left{grid-column:span 6}
+  .contact-grid .right{grid-column:span 6;display:grid;gap:12px}
+  .contact-img{height:180px;background:#dbe1e8;border-radius:12px;border:1px solid var(--line)}
+  .map{border:0;border-radius:12px;min-height:300px;width:100%}
+  @media(max-width:980px){.contact-grid .left,.contact-grid .right{grid-column:span 12}}
+
+  /* --- reveal animation --- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="wrap nav_inner">
+    <div class="brand">
+      <img src="assets/img/grevialogo.png" alt="Company Logo" />
+      <span class="company-name" onclick="location.reload()" style="cursor:pointer;">Grevia Solutions</span>
+    </div>
+
+    <nav class="navlinks" id="navLinks">
+      <div class="menu-group">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About Us</a>
+        <div class="dropdown">
+          <a href="#products">Products
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <div class="drop">
+            <a href="products/heat-exchangers.html">Heat Exchangers</a>
+            <a href="products/industrial-lubricants.html">Industrial Lubricants & Speciality Chemicals</a>
+            <a href="#products">Carbon Emmisions & Carbon Credits</a>
+            <!-- <a href="#products">Chemicals</a> -->
+            <!-- <a href="#products">Cutting Tools</a> -->
+            <!-- <a href="#products">Metallic Lubricants</a> -->
+            <!-- <a href="#products">Specialising Chemicals</a> -->
+            <!-- <a href="#products">Welding Consumables</a> -->
+            <!-- <a href="#products">CNC Consumables</a> -->
+          </div>
+        </div>
+        <a href="#projects">Projects</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="toggle">
+      <!-- theme toggle -->
+      <button id="themeBtn" class="btn ghost" style="padding:8px 10px">
+        <span id="themeIcon">
+          <!-- sun -->
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5L3.5 3.5M20.5 20.5 19 19M19 5l1.5-1.5M3.5 20.5 5 19M12 7a5 5 0 100 10 5 5 0 000-10z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+      </button>
+      <div class="hamb" id="hamburger" aria-label="Open menu">☰</div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Powering Industry with Smart, Reliable Solutions</h1>
+    <p>
+      We operate across Industrial Lubricants & Speciality Chemicals and more. Heat Exchangers to Carbon Emmisions
+    </p>
+    <div class="hero-buttons">
+      <!-- <button class="btn-primary">Explore Products</button> -->
+      <a class="btn-primary" href="#products">Explore Products</a>
+      <a class="btn-primary" href="contact.html">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="what">
+  <div class="wrap">
+    <h2>What we do</h2>
+    <p class="sub">Core areas of work with clear, product-aligned accents.</p>
+    <div class="grid" style="margin-top:14px">
+      
+      <!-- LEFT: CARDS -->
+      <div class="cards">
+        <article class="w-card reveal">
+          <h3>Heat Exchangers</h3>
+          <p>Selection and supply of efficient heat transfer equipment. <!--<span class="chip">Coming Soon</span>--></p>
+        </article>
+        <article class="w-card reveal">
+          <h3>Industrial Lubricants & Speciality Chemicals</h3>
+          <p>Supply and advisory for critical lubrication and chemical needs in heavy industry.</p>
+        </article>
+      
+        <article class="w-card reveal">
+          <h3>Carbon Emmisions</h3>
+          <p>Carbon reduction, heat transfer calcs, agency &amp; bank liaison, credits. <!--<span class="chip">Coming Soon</span>--></p>
+        </article>
+
+        <!-- <article class="w-card reveal">
+          <h3>Specialising Chemicals</h3>
+          <p>Custom chemical solutions tuned for your process targets and compliance.</p>
+        </article> -->
+
+        <!-- <article class="w-card reveal">
+          <h3>Welding Consumables</h3>
+          <p>Wear parts and spares for continuous operations. <span class="chip">Coming Soon</span></p>
+        </article>
+        <article class="w-card reveal">
+          <h3>Consumables for CNC</h3>
+          <p>Coolants, filters, and tooling consumables. <span class="chip">Coming Soon</span></p>
+        </article>
+        <article class="w-card reveal">
+          <h3>Circular Saw (Cutting Tools)</h3>
+          <p>High-precision cutting solutions, optimized for uptime and tool life.</p>
+        </article> -->
+      </div>
+
+      <!-- RIGHT: IMAGE SECTION -->
+      <div class="what-img">
+        <img src="assets/img/what-we-do.png" alt="What we do" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>About Us</h2>
+    <p class="lead">Our profile: We bring hands-on experience from plant operations, supply chains, and maintenance engineering across sectors such as steel, automotive, and process industries. The leadership blends technical know-how with pragmatic cost and reliability thinking.</p>
+
+    <div class="directors">
+      <!-- Director template 1 -->
+      <article class="d-card reveal">
+        <img class="avatar" src="assets/img/director-1.png" alt="Director 1" />
+        <h4>Director Name</h4>
+        <div class="qual">BE (Mechanical)</div>
+        <p>Short 3–4 line professional summary. Focus on years of experience, core strengths, and value you bring to customers.</p>
+      </article>
+      <!-- Director template 2 -->
+      <article class="d-card reveal">
+        <img class="avatar" src="assets/img/director-2.png" alt="Director 2" />
+        <h4>Director Name</h4>
+        <div class="qual">MSc (Chemistry)</div>
+        <p>Short 3–4 line professional summary. Mention compliance, documentation, and process achievements where relevant.</p>
+      </article>
+      <!-- Director template 3 -->
+      <article class="d-card reveal">
+        <img class="avatar" src="assets/img/director-3.png" alt="Director 3" />
+        <h4>Director Name</h4>
+        <div class="qual">PGDBM</div>
+        <p>Short 3–4 line professional summary. Vendor development, supply reliability, and liaison experience can go here.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="wrap">
+    <div class="row-head">
+      <div>
+        <h2>Products</h2>
+        <p class="sub">We serve in these three verticals with consultancy and proffessionalism</p>
+      </div>
+      <div class="hint">Use the arrows or drag</div>
+    </div>
+    <div class="hscroll reveal">
+      <button class="arrow left" id="arrowLeft" aria-label="Scroll products left">←</button>
+      <div class="rail" id="rail">
+        <!-- 1 Heat Exchangers -->
+        <article class="p-card">
+          <img class="p-img" src="assets/img/plate-he.jpg" alt="" />
+          <div class="p-body">
+            <h4>Heat Exchangers</h4>
+            <p>Selection, sizing, and supply for effective heat-transfer needs.</p>
+            <div class="p-cta"><span class="flag red">Heat</span><a href="products/heat-exchangers.html" class="p-cta btn-mini">Explore →</a></div>
+          </div>
+        </article>
+
+        <!-- 2 Industrial Lubricants & Speciality Chemicals -->
+        <article class="p-card">
+          <img class="p-img" src="assets/img/industriallubricants.png" alt="" />
+          <div class="p-body">
+            <h4>Industrial Lubricants & Speciality Chemicals</h4>
+            <p>Hydraulic, gear, compressor, and food-grade oils for reliability and life.</p>
+            <div class="p-cta"><span class="flag grey">Industrial Lubricants</span><a href="products/industrial-lubricants.html" class="p-cta btn-mini">Explore →</a></div>
+          </div>
+        </article>
+
+        <!-- 3 Carbon Emmisions -->
+        <article class="p-card coming-soon">
+          <img class="p-img" src="assets/img/projectconsultation.png" alt="" />
+          <div class="p-body">
+            <h4>Carbon Emmisions & Carbon Credits</h4>
+            <p>Carbon emission reduction, heat transfer calcs, agency &amp; bank liaison, credits.</p>
+            <div class="p-cta">
+              <span class="flag green">Carbon Emmissions</span>
+              <a href="#" class="p-cta btn-mini" disabled>Explore →</a>
+            </div>
+          </div>
+          <!-- Overlay -->
+          <div class="overlay">
+            <span>Coming Soon</span>
+          </div>
+        </article>
+
+
+        <!-- 4 Chemicals (coming soon)-->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/chemicals.png" alt="" />
+          <div class="p-body">
+            <h4>Chemicals</h4>
+            <p>Process, cleaning, water treatment, and specialty blends with documentation.</p>
+            <div class="p-cta"><span class="flag blue">Chemicals</span><button class="p-cta btn-mini" data-product="Chemicals">Explore →</button></div>
+          </div>
+        </article> -->
+
+        <!-- 5 Cutting tools (coming soon)-->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/cuttingtools.png" alt="" />
+          <div class="p-body">
+            <h4>Cutting Tools</h4>
+            <p>High-accuracy saws and consumables for stable cutting and reduced scrap.</p>
+            <div class="p-cta"><span class="flag grey">Cutting</span><button class="p-cta btn-mini" data-product="Circular Saw">Explore →</button></div>
+          </div>
+        </article> -->
+
+        <!-- 6 Metallic Lubricants (coming soon) -->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/metalliclubricants.png" alt="" />
+          <div class="p-body">
+            <h4>Metallic Lubricants</h4>
+            <p>Solid/graphite lubricants for extreme heat, load, and contamination.</p>
+            <div class="p-cta"><span class="flag grey">Graphite</span><button class="p-cta btn-mini" data-product="Graphite Lubricants">Explore →</button></div>
+          </div>
+        </article> -->
+
+        <!-- 7 Wearing consumables (Coming soon) -->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/weldingconsumables.png" alt="" />
+          <div class="p-body">
+            <h4>Welding Consumables</h4>
+            <p>Welding consumables &amp; that keep lines running around the clock.</p>
+            <div class="p-cta"><span class="flag grey">MRO</span><button class="p-cta btn-mini" disabled>Explore →</button></div>
+          </div>
+        </article> -->
+
+        <!-- 8 Consumables for CNC (Coming soon) -->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/consumablesforCNC(filter).png" alt="" />
+          <div class="p-body">
+            <h4>Consumables for CNC</h4>
+            <p>Coolants, filters, and tooling consumables for CNC floors.</p>
+            <div class="p-cta"><span class="flag grey">CNC</span><button class="p-cta btn-mini" disabled>Explore →</button></div>
+          </div>
+        </article> -->
+
+        <!-- Temporarily at hault-->
+        <!-- <article class="p-card">
+          <img class="p-img" src="assets/img/specialisingchemicals.png" alt="" />
+          <div class="p-body">
+            <h4>Specialising Chemicals</h4>
+            <p>Custom chemical solutions tuned for your process targets and compliance.</p>
+            <div class="p-cta"><span class="flag blue">Specialty</span><button class="p-cta btn-mini" disabled>Explore →</button></div>
+          </div>
+        </article> -->
+      </div>
+      <button class="arrow right" id="arrowRight" aria-label="Scroll products right">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="panel center reveal" style="margin-top:14px">
+      <p style="max-width:700px">Under Development</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="wrap">
+    <h2>Careers</h2>
+    <div class="career-box reveal" style="margin-top:14px">
+      <strong>No openings at the moment.</strong>
+      <p class="sub" style="margin:6px 0 0">We will update this space as soon as roles open up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (dedicated section) -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact Us</h2>
+    <div class="contact-grid" style="margin-top:14px">
+      <!-- LEFT PANEL -->
+      <div class="left panel reveal" style="display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <p class="sub" style="margin-bottom:14px">
+            <strong>Let’s build reliable supply and performance together.</strong>  
+            Join hands with us for the future — consistent quality, transparent documentation, and on-time delivery.
+          </p>
+
+          <p class="sub" style="margin:6px 0"><strong>Email:</strong> greviasol@gmail.com</p>
+          <p class="sub" style="margin:6px 0 12px"><strong>Phone:</strong> +91 95577 66033</p>
+
+          <strong>Registered Address</strong>
+          <p class="sub" style="margin:6px 0 12px">S/2, Vrinda, Raja Rani Vihar, Near Birla School, Haldwani - 263139, Dist Nainital, Uttarakhand, India.</p>
+
+          <strong>Branch Address</strong>
+          <p class="sub" style="margin:6px 0 0">Plot No B28, Jai Nagar 1, Durga Estate Colony, Chattarpur, Rudarpur - 263153, US Nagar, Uttarakhand, India.</p>
+        </div>
+            <!-- Button always sticks to bottom -->
+            <center><a class="btn primary" href="contact.html" target="_blank" rel="noreferrer" style="align-self:flex-start;margin-top:20px">
+            Open full contact page
+            </a></center>
+        </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right reveal">
+        <div class="contact-img" style="background-image:url('assets/img/contact-side.png');background-size:cover;background-position:center"></div>
+
+        <!-- Embedded interactive map -->
+        <iframe class="map"
+          src="https://maps.app.goo.gl/nGjyeyM8oMnPZPHd6?g_st=aw"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER (kept minimal) -->
+<footer style="border-top:1px solid var(--line);margin-top:38px">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;padding:24px 0;flex-wrap:wrap">
+    <div><strong>Grevia Solutions</strong><div class="sub">Reliable supplies • Clear documentation • On-time delivery</div></div>
+    <div class="sub">© 2025 Grevia Solutions</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Nav Toggle
+  const burger = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  burger?.addEventListener('click', ()=> nav.classList.toggle('open'));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  // Theme toggle with localStorage
+  const themeBtn = document.getElementById('themeBtn');
+  const themeIcon = document.getElementById('themeIcon');
+  const setIcon = (mode)=>{
+    themeIcon.innerHTML = mode==='dark'
+    ? `<svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+    : `<svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5L3.5 3.5M20.5 20.5 19 19M19 5l1.5-1.5M3.5 20.5 5 19M12 7a5 5 0 100 10 5 5 0 000-10z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+  };
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  setIcon(saved);
+  themeBtn?.addEventListener('click', ()=>{
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur==='dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setIcon(next);
+  });
+
+  // Product rail arrows + drag
+  const rail = document.getElementById('rail');
+  const arrowRight = document.getElementById('arrowRight');
+  const arrowLeft = document.getElementById('arrowLeft');
+
+  const scrollByCards = (dir)=>{
+    const card = rail.querySelector('.p-card');
+    const w = card ? card.getBoundingClientRect().width + 16 : 320;
+    rail.scrollBy({left: (dir==='right' ? 1 : -1) * (w*2), behavior:'smooth'});
+  };
+  arrowRight?.addEventListener('click', ()=> scrollByCards('right'));
+  arrowLeft?.addEventListener('click', ()=> scrollByCards('left'));
+
+  // Drag to scroll (desktop + touch)
+  let isDown=false,startX,scrollLeft;
+  rail.addEventListener('mousedown', (e)=>{isDown=true; startX=e.pageX - rail.offsetLeft; scrollLeft=rail.scrollLeft;});
+  rail.addEventListener('mouseleave', ()=>{isDown=false;});
+  rail.addEventListener('mouseup', ()=>{isDown=false;});
+  rail.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - rail.offsetLeft; const walk=(x-startX)*1.2; rail.scrollLeft=scrollLeft - walk;});
+  let startTouchX=0, startScroll=0;
+  rail.addEventListener('touchstart', (e)=>{startTouchX = e.touches[0].pageX; startScroll = rail.scrollLeft;}, {passive:true});
+  rail.addEventListener('touchmove', (e)=>{const x=e.touches[0].pageX; rail.scrollLeft = startScroll + (startTouchX - x);}, {passive:true});
+
+  // Product Explore buttons (placeholder)
+  document.querySelectorAll('.btn-mini[data-product]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const name = e.currentTarget.getAttribute('data-product');
+      alert(`${name}: detailed page coming soon.`);
+    });
+  });
+</script>
+<script>
+  document.querySelectorAll("[data-product]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const product = btn.getAttribute("data-product");
+      if (product === "Heat Exchangers") {
+        window.location.href = "heat-exchangers.html";
+      }
+      if (product === "Industrial Lubricants") {
+        window.location.href = "industrial-lubricants.html";
+      }
+      if (product === "Carbon Emissions") {
+        window.location.href = "carbon-emissions.html";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
