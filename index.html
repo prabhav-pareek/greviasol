@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grevia Solutions Pvt Ltd - Intellectual Company with Smart & Reliable Solutions</title>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-blue: #0066ff;
+            --primary-red: #ff3366;
+            --gradient: linear-gradient(135deg, #0066ff 0%, #ff3366 100%);
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1.2rem 0;
+        }
+
+        header.shrink {
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            transition: all 0.3s ease;
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-links > li > a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links > li:hover > a::after {
+            width: 100%;
+        }
+        
+        /* Reset all list styles completely */
+ul, li {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Dropdown Container */
+.dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+/* Show dropdown on hover */
+.nav-links > li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown Items */
+.dropdown li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+}
+
+/* Active/Clickable Items */
+.dropdown a.active,
+.dropdown a:not(.disabled):hover {
+    color: #007bff;
+    background-color: #f8f9fa;
+}
+
+/* Disabled Items */
+.dropdown a.disabled {
+    color: #adb5bd;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Sub-dropdown */
+.sub-dropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    min-width: 220px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    z-index: 1002;
+    margin-left: 1px;
+}
+
+/* Show sub-dropdown on hover */
+.dropdown li:hover .sub-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Smart positioning for right-side dropdowns */
+.nav-links > li:nth-child(3) .dropdown,
+.nav-links > li:nth-child(4) .dropdown,
+.nav-links > li:nth-child(5) .dropdown {
+    left: auto;
+    right: 0;
+}
+
+.nav-links > li:nth-child(3) .sub-dropdown,
+.nav-links > li:nth-child(4) .sub-dropdown,
+.nav-links > li:nth-child(5) .sub-dropdown {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 1px;
+    transform: translateX(10px);
+}
+
+.nav-links > li:nth-child(3) .dropdown li:hover .sub-dropdown,
+.nav-links > li:nth-child(4) .dropdown li:hover .sub-dropdown,
+.nav-links > li:nth-child(5) .dropdown li:hover .sub-dropdown {
+    transform: translateX(0);
+}
+
+/* Remove all possible bullet styles */
+.nav-links, .nav-links ul, .nav-links li,
+.dropdown, .dropdown ul, .dropdown li,
+.sub-dropdown, .sub-dropdown ul, .sub-dropdown li {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+    list-style-position: outside !important;
+}
+
+        /* Enhanced Dropdown Styles with Sub-dropdowns Fixed */
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            min-width: 250px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            overflow: visible;
+        }
+
+        /* Smart positioning to prevent overflow */
+        .nav-links > li:nth-child(3) .dropdown,
+        .nav-links > li:nth-child(4) .dropdown,
+        .nav-links > li:nth-child(5) .dropdown {
+            left: auto;
+            right: 0;
+        }
+
+        .nav-links > li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            transform: rotate(45deg);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            border-left: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-links > li:nth-child(3) .dropdown::before,
+        .nav-links > li:nth-child(4) .dropdown::before,
+        .nav-links > li:nth-child(5) .dropdown::before {
+            left: auto;
+            right: 20px;
+        }
+
+        .dropdown li {
+            position: relative;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .dropdown a:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08) 0%, rgba(255, 51, 102, 0.08) 100%);
+            color: var(--primary-blue);
+            padding-left: 2rem;
+        }
+
+        .dropdown li:last-child a {
+            border-bottom: none;
+        }
+
+        /* Fixed Sub-dropdown */
+        .sub-dropdown {
+            position: absolute;
+            top: 0;
+            left: calc(100% + 15px);
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1002;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-links > li:nth-child(3) .sub-dropdown,
+        .nav-links > li:nth-child(4) .sub-dropdown,
+        .nav-links > li:nth-child(5) .sub-dropdown {
+            left: auto;
+            right: calc(100% + 15px);
+            transform: translateX(20px);
+        }
+
+        .dropdown li:hover .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .nav-links > li:nth-child(3) .dropdown li:hover .sub-dropdown,
+        .nav-links > li:nth-child(4) .dropdown li:hover .sub-dropdown,
+        .nav-links > li:nth-child(5) .dropdown li:hover .sub-dropdown {
+            transform: translateX(0);
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            margin-left: 0.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links > li:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Hero Section with Video Background - FIXED */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 12rem 5% 4rem;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: white;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            max-width: 90%;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.8rem;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            perspective: 1000px;
+            height: 300px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .about-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-front {
+            background: white;
+            border: 2px solid #f0f0f0;
+        }
+
+        .card-back {
+            background: var(--gradient);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .card-front .card-icon {
+            background: var(--light-bg);
+            color: var(--primary-blue);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Products Section - Side by Side Layout */
+        .products {
+    background: #ffffff;
+    padding: 8rem 0;
+    max-width: 100%;
+    margin: 0;
+}
+
+.products-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.product-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+    align-items: center;
+}
+
+.product-item:nth-child(even) {
+    direction: rtl;
+}
+
+.product-item:nth-child(even) > * {
+    direction: ltr;
+}
+
+/* Enhanced Product Image Container with Slide Effect */
+.product-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* First Image (Default Visible) */
+.product-image .image-first {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* Second Image (Slides in from left) */
+.product-image .image-second {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+/* Hover Effects */
+.product-image:hover .image-first {
+    transform: translateX(100%);
+}
+
+.product-image:hover .image-second {
+    left: 0;
+}
+
+
+.product-content {
+    padding: 2rem 0;
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+}
+
+.product-description {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.explore-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgb(0, 82, 204) 0%, #cc002b 100%);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.explore-btn:hover::before {
+    left: 0;
+}
+
+.explore-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 102, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .product-item {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .product-item:nth-child(even) {
+        direction: ltr;
+    }
+
+    .product-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-image {
+        height: 250px;
+    }
+}
+
+
+        /* Career Section */
+        .career {
+            background: white;
+            text-align: center;
+        }
+
+        .career-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .career-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .career-subtitle {
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .career-intro {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            text-align: center;
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .career-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .career-section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .career-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .career-highlight {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.05) 0%, rgba(255, 51, 102, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-blue);
+            margin: 1.5rem 0;
+        }
+
+        .career-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .career-cta h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .career-cta p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button-regular {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .cta-button-regular::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button-regular:hover::before {
+            left: 0;
+        }
+
+        .cta-button-regular:hover {
+            color: rgb(255, 255, 255);
+        }
+
+        /* Redesigned Contact Section */
+#contact {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Animated Title with Underline */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gradient);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.section-title:hover::after {
+    width: 200px;
+}
+
+/* Contact Message */
+.contact-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Main Wrapper */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: start;
+}
+
+/* Contact Info Container */
+.contact-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Individual Contact Cards */
+.contact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15);
+    border-left: 4px solid var(--primary-blue);
+}
+
+/* Contact Card Headings with Underline Animation */
+.contact-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+}
+
+.contact-card h4::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.contact-card:hover h4::after {
+    width: 100%;
+}
+
+.contact-card p {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* Map and Image Container */
+.contact-map-container {
+    display: grid;
+    grid-template-rows: 1fr 0.6fr;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+/* Map Card */
+.map-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 300px;
+}
+
+.map-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.map-card iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Contact Image Card */
+.contact-image-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 180px;
+}
+
+.contact-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* CTA Section */
+.contact-cta {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+}
+
+/* Enhanced CTA Button */
+.cta-button-regular {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: transparent;
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    isolation: isolate;
+    font-size: 1.1rem;
+}
+
+.cta-button-regular::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.cta-button-regular:hover::before {
+    left: 0;
+}
+
+.cta-button-regular:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-map-container {
+        grid-template-rows: 250px 150px;
+    }
+    
+    .map-card {
+        height: 250px;
+    }
+    
+    .contact-image-card {
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    #contact {
+        padding: 4rem 1rem;
+    }
+    
+    .contact-wrapper {
+        gap: 1.5rem;
+    }
+    
+    .contact-card {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Place Order Button Container */
+.place-order-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    padding: 3rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.place-order-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15);
+}
+
+/* Place Order Button */
+.place-order-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: var(--gradient);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.place-order-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0052cc 0%, #cc002b 100%);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.place-order-button:hover::before {
+    left: 0;
+}
+
+.place-order-button:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-map-container {
+        grid-template-rows: 250px auto;
+    }
+    
+    .map-card {
+        height: 250px;
+    }
+    
+    .place-order-container {
+        padding: 2rem 1rem;
+    }
+    
+    .place-order-button {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .place-order-button {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+}
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero {
+                padding: 8rem 2rem 4rem;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .product-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-item:nth-child(even) {
+                direction: ltr;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dropdown, .sub-dropdown {
+                position: relative;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: var(--light-bg);
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 1rem 2rem;
+                text-align: center;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-item {
+                margin-bottom: 4rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            animation: breathe 2s ease-in-out infinite;
+        }
+
+        /* Footer Styles - Fixed Alignment */
+footer {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
+    margin-top: 0;
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    align-items: start;
+}
+
+.footer-company {
+    max-width: 100%;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.footer-logo h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.footer-contact p {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #6c757d;
+}
+
+.footer-contact a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.footer-social a:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.footer-social a[aria-label="YouTube"]:hover {
+    background: #ff0000;
+}
+
+.footer-social a[aria-label="LinkedIn"]:hover {
+    background: #0077b5;
+}
+
+.footer-social svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* FIXED: Footer Section Titles and Underlines */
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure left alignment */
+    padding: 0; /* Remove any inherited padding */
+    margin: 0; /* Remove any inherited margins */
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: var(--text-dark);
+    position: relative;
+    padding-bottom: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    width: fit-content; /* Only as wide as the text */
+}
+
+/* FIXED: Properly centered gradient underline */
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 30px;
+    height: 2px;
+    background: var(--gradient);
+    border-radius: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.footer-section li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-section a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-section a:hover {
+    color: var(--primary-blue);
+    padding-left: 8px;
+}
+
+.footer-section a::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+}
+
+.footer-section a:hover::before {
+    width: 4px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.footer-certifications {
+    font-weight: 500;
+    color: var(--primary-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-company {
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    .footer-section {
+        align-items: center;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        right: auto;
+        margin: 0;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+    
+    .footer-logo h3 {
+        font-size: 1.2rem;
+    }
+
+/* Hamburger Menu Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    box-sizing: content-box;
+    z-index: 1100;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 10px;
+    transition: 0.3s all ease;
+}
+
+/* Hamburger Animation */
+.mobile-menu-btn.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 10px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        width: 250px;
+        flex-direction: column;
+        padding: 1rem 0;
+        z-index: 1050;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.show {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-links li {
+        padding: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links li > a {
+        display: block;
+        padding: 0.8rem 1.2rem;
+        color: var(--text-dark);
+        font-weight: 500;
+        border-bottom: none;
+    }
+
+    .nav-links li > a:hover {
+        color: var(--primary-blue);
+        background: rgba(0, 102, 255, 0.05);
+    }
+
+    /* Mobile Dropdown Styles */
+    .dropdown, .sub-dropdown {
+        position: static;
+        box-shadow: none;
+        background: rgba(248, 249, 250, 0.5);
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        width: 100%;
+    }
+
+    .dropdown.show, .sub-dropdown.show {
+        max-height: 500px;
+    }
+
+    .dropdown li, .sub-dropdown li {
+        border-bottom: none;
+    }
+
+    .dropdown a, .sub-dropdown a {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+    .sub-dropdown a {
+        padding-left: 3rem;
+        font-size: 0.85rem;
+    }
+
+    .dropdown-arrow {
+        float: right;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown-arrow.rotated {
+        transform: rotate(180deg);
+    }
+}
+
+/* Hide mobile elements by default */
+.mobile-nav, .mobile-overlay {
+    display: none;
+}
+
+/* Desktop navigation */
+.desktop-nav {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+/* Hamburger Button */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
+}
+
+.mobile-menu-btn .bar {
+    height: 3px;
+    width: 24px;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
+/* Hamburger Animation */
+.mobile-menu-btn.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .desktop-nav {
+        display: none;
+    }
+
+    /* Mobile Navigation Panel */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1050;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .mobile-nav.show {
+        right: 0;
+    }
+
+    /* Mobile Navigation Header */
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        background: var(--gradient);
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .mobile-close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+    }
+
+    /* Mobile Navigation Links */
+    .mobile-nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-nav-links li {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-nav-links a {
+        display: block;
+        padding: 1.2rem 1.5rem;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-nav-links a:hover {
+        background: var(--gradient);
+        color: white;
+        padding-left: 2rem;
+    }
+
+    /* Mobile Overlay */
+    .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+    .mobile-nav {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .logo h2 {
+        font-size: 1.2rem;
+    }
+}
+
+</style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="assets/img/grevialogo.png" alt="Grevia Solutions" class="loading-logo">
+    </div>
+
+    <!-- Header -->
+<header id="header">
+    <nav>
+        <div class="logo" onclick="location.reload()" style="cursor: pointer;">
+            <img src="assets/img/grevialogo.png" alt="Grevia Solutions">
+            <h2>Grevia Solutions Pvt. Ltd.</h2>
+        </div>
+
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <ul class="nav-links desktop-nav">
+            <li><a href="#home">Home</a></li>
+            <li>
+                <a href="#about">About Us <span class="dropdown-arrow">▼</span></a>
+                <ul class="dropdown">
+                    <li><a href="about us/overview.html">Overview</a></li>
+                    <li><a href="about us/mission.html">Mission & Vision</a></li>
+                    <li><a href="about us/management.html">Management</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#products">Products <span class="dropdown-arrow">▼</span></a>
+                <ul class="dropdown">
+                    <li><a href="products/heat-exchanger.html">Heat Exchangers</a></li>
+                    <li><a href="products/cnc.html">CNC & Automation</a></li>
+                    <li><a href="products/carbon.html">Carbon Credits</a></li>
+                    <li><a href="products/lubricants.html">Industrial Lubricants</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Navigation (Simplified) -->
+        <div class="mobile-nav">
+            <div class="mobile-nav-header">
+                <span>Menu</span>
+                <button class="mobile-close-btn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay"></div>
+    </nav>
+</header>
+
+
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" id="home">
+        <!-- Video Background Only for Hero -->
+        <video class="hero-video" autoplay muted loop>
+            <source src="assets/img/hero-bg-compressed.mp4" type="video/mp4">
+
+            <!-- Fallback for browsers that don't support video -->
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="hero-content">
+            <h1>Intellectual Company<br>with Smart & Reliable Solutions</h1>
+            <p>We deal across customised heat exchangers, lubricants & specialty chemicals, CNC & automation, and reducing carbon emissions.</p>
+            <a href="#products" class="cta-button">Explore Product Categories</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-subtitle">Grevia Solutions is a supplier and technical consultant in industrial lubricants, chemicals, and heat transfer equipment. We focus on performance, compliance and sustainability.</p>
+        
+        <div class="about-cards">
+            <div class="about-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="33" height="32" viewBox="0 0 33 32" data-code="57351" data-tags="search,lookup,find,magnifier"><g fill="#444" transform="scale(0.03125 0.03125)"><path d="M48 1024h672c26.464 0 48-21.536 48-48v-240c0-0.32-0.16-0.576-0.192-0.896 1.76-1.12 3.584-2.176 5.312-3.36l255.552 255.552c3.136 3.136 7.232 4.704 11.328 4.704s8.192-1.568 11.328-4.672c6.24-6.24 6.24-16.384 0-22.624l-253.216-253.216c40.448-37.984 65.888-91.776 65.888-151.488 0-73.504-38.432-138.112-96.192-175.104 0.032-0.32 0.192-0.576 0.192-0.896v-80c0-0.544-0.256-0.992-0.288-1.504-0.064-0.736-0.256-1.376-0.416-2.080-0.544-2.272-1.472-4.32-2.88-6.112-0.224-0.288-0.192-0.64-0.416-0.928l-256-288c-0.096-0.096-0.224-0.096-0.32-0.192-1.92-2.080-4.384-3.456-7.136-4.288-0.608-0.192-1.152-0.256-1.792-0.352-0.928-0.16-1.792-0.544-2.752-0.544h-448c-26.464 0-48 21.536-48 48v928c0 26.464 21.536 48 48 48zM832 560c0 97.056-78.976 176-176 176s-176-78.944-176-176 78.976-176 176-176 176 78.944 176 176zM512 58.080l204.384 229.92h-188.384c-7.040 0-16-13.44-16-24v-205.92zM32 48c0-8.832 7.2-16 16-16h432v232c0 25.888 20.96 56 48 56h208v48.032c-24.64-10.304-51.648-16.032-80-16.032-58.816 0-111.872 24.64-149.728 64h-330.272c-8.832 0-16 7.168-16 16s7.168 16 16 16h305.024c-18.080 28.128-29.504 60.832-32.192 96h-272.832c-8.832 0-16 7.168-16 16s7.168 16 16 16h272.8c2.688 35.168 14.144 67.872 32.192 96h-304.992c-8.832 0-16 7.168-16 16s7.168 16 16 16h328c0.672 0 1.248-0.288 1.92-0.384 37.888 39.584 91.104 64.384 150.080 64.384 28.352 0 55.36-5.728 80-16.064v224.064c0 8.832-7.2 16-16 16h-672c-8.96 0-16-7.040-16-16v-928zM176 320h192c8.832 0 16-7.168 16-16s-7.168-16-16-16h-192c-8.832 0-16 7.168-16 16s7.168 16 16 16zM176 832h416c8.832 0 16-7.168 16-16s-7.168-16-16-16h-416c-8.832 0-16 7.168-16 16s7.168 16 16 16z"/></g></svg>
+                        </div>
+                        <h3 class="card-title">Overview</h3>
+                        <p class="card-description">Learn about our company history, mission, and core values.</p>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">Company Overview</h3>
+                        <p class="card-description">Dynamic startup driven by passionate team with decades of experience across diverse industries.</p>
+                        <p>‎ </p>
+                        <a href="about us/overview.html"class="cta-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32" data-tags="eye,views"><g fill="#444" transform="scale(0.03125 0.03125)"><path d="M512 192c-282.784 0-512 320-512 320s229.216 320 512 320 512-320 512-320-229.216-320-512-320zM512 704c-106.016 0-192-85.984-192-192s85.984-192 192-192 192 85.984 192 192-85.984 192-192 192zM512 384c-70.688 0-128 57.312-128 128s57.312 128 128 128 128-57.312 128-128-57.312-128-128-128z"/></g></svg>
+                        </div>
+                        <h3 class="card-title">Mission & Vision</h3>
+                        <p class="card-description">Discover our vision for sustainable industrial solutions.</p>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">Our Vision</h3>
+                        <p class="card-description">To emerge as a global leader in engineering solutions, recognized for quality, innovation, and sustainable practices.</p>
+                        <p>‎ </p>
+                        <a href="about us/mission.html" class="cta-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24" data-tags="people_alt"><g fill="#444" transform="scale(0.0234375 0.0234375)"><path d="M384 554q64 0 140 18t139 60 63 94v128h-684v-128q0-52 63-94t139-60 140-18zM640 512q-26 0-56-10 56-66 56-160 0-38-16-86t-40-76q30-10 56-10 70 0 120 51t50 121-50 120-120 50zM214 342q0-70 50-121t120-51 120 51 50 121-50 120-120 50-120-50-50-120zM712 560q106 16 188 59t82 107v128h-172v-128q0-98-98-166z"/></g></svg>
+                        </div>
+                        <h3 class="card-title">Management</h3>
+                        <p class="card-description">Meet our experienced leadership team.</p>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">Leadership Team</h3>
+                        <p class="card-description">Visionary leaders with over 30+ years of combined experience driving innovation and growth.</p>
+                        <p>‎ </p>
+                        <a href="about us/management.html" class="cta-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Products Section - Side by Side Layout -->
+    <section class="products" id="products">
+    <div class="products-container">
+        <h2 class="section-title">Product Categories</h2>
+        <p class="section-subtitle">Comprehensive solutions across four key industrial sectors with cutting-edge technology and sustainable practices.</p>
+        
+        <div class="product-item">
+            <div class="product-image">
+                <img src="assets/img/box-he.jpg" alt="Heat Exchangers" class="image-first">
+                <img src="assets/img/shell-he.png" alt="Heat Exchangers Detail" class="image-second">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">Heat Exchangers</h3>
+                <p class="product-description">Box type, shell & tube, plate, pillow plate and finned tube exchangers for efficient heat transfer. Efficient, serviceable and specification-driven exchangers for industrial duty designed for optimal performance across food, pharmaceutical, chemical, and manufacturing sectors.</p>
+                <a href="products/heat-exchangers.html" class="explore-btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="assets/img/cnc-machine.jpg" alt="CNC & Automation" class="image-first">
+                <img src="assets/img/cnc-automation.png" alt="CNC & Automation Detail" class="image-second">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">CNC & Automation</h3>
+                <p class="product-description">Advanced automation solutions and CNC technologies to optimize productivity. Advanced CNC machines, laser cutting, plasma cutting, and special purpose machines with AI-driven automation for precision manufacturing and industrial applications.</p>
+                <a href="products/cnc.html" class="explore-btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="assets/img/industriallubricants.png" alt="Industrial Lubricants & Specialty Chemicals" class="image-first">
+                <img src="assets/img/chemicals.png" alt="Lubricants Detail" class="image-second">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">Industrial Lubricants & Specialty Chemicals</h3>
+                <p class="product-description">Hydraulic oils, gear oils, greases and performance additives with complete technical support. Wide range of industrial oils, lubricants, and specialty chemicals for various industrial applications with superior performance characteristics and environmental compliance.</p>
+                <a href="products/lubricants.html" class="explore-btn">Explore</a>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image">
+                <img src="assets/img/carbon-emission.png" alt="Carbon Emissions" class="image-first">
+                <img src="assets/img/windmill-carbon.jpg" alt="Carbon Solutions Detail" class="image-second">
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">Carbon Emissions</h3>
+                <p class="product-description">Carbon capture solutions, offset programs, and emission reduction technologies for sustainable industrial operations and environmental compliance. Technical tie-ups with accredited agencies for carbon emission study and evaluation.</p>
+                <a href="products/carbon.html" class="explore-btn">Explore</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Career Section -->
+    <section class="career" id="career">
+        <div class="career-header">
+            <h2 class="section-title">Careers at Grevia</h2>
+            <h3 class="career-subtitle">Empowering Your Career, Fueling the Future of Energy</h3>
+        </div>
+        
+        <div class="career-content">
+            <div class="career-intro">
+                Join our team and fuel your future with endless opportunities in the dynamic Heat Exchanger & Automation Industry. We offer roles that challenge and inspire, providing a platform for growth, innovation, and career advancement in a rapidly evolving energy sector. Be part of our mission to shape the future of energy.
+            </div>
+            
+            <div class="career-section">
+                <h3>Overview</h3>
+                <div class="career-highlight">
+                    <p><strong>Choosing a company to work for is an important decision.</strong> Take the right steps toward transforming your career and give it your ALL working at Grevia Solutions Pvt. Ltd.</p>
+                </div>
+                <p>Our team is All In when it comes to delivering business results. We are building a culture of accountability and high performance and look for dedicated associates to help us create an Open, Connected Community.</p>
+            </div>
+            
+            <div class="career-section">
+                <h3>What We Do Makes a Difference</h3>
+                <p><strong>Teamwork, innovation and results</strong> are pillars of our culture. Our values promote an inclusive, supportive and collaborative culture that allow us to be leaders in the Intellectual industry.</p>
+                <div class="career-highlight">
+                    <p>That's why we look for the <strong>bright, innovative, passionate and collaborative people</strong> who are driven to succeed. Are you ready to find your career at Grevia Solutions Pvt Ltd.?</p>
+                </div>
+            </div>
+            
+            <div class="career-cta">
+                <h4>Ready to Join Our Team?</h4>
+                <p>Explore current opportunities and submit your application today.</p>
+                <div style="text-align: center; margin-top: 2rem;">
+    <a href="Careers/job-application.html" class="cta-button-regular">Job Application Form</a>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    
+    <div class="contact-message">
+        Let's build reliable supply and performance together. Join hands with us for the future — 
+        consistent quality, transparent documentation, and on-time delivery.
+    </div>
+    
+    <div class="contact-wrapper">
+        <div class="contact-info-container">
+            <div class="contact-card">
+                <h4>Registered Address</h4>
+                <p>S/2 Vrinda, Raja Rani Vihar near Birla School<br>Haldwani - 263139, Dist. Nainital, Uttarakhand</p>
+            </div>
+            
+            <div class="contact-card">
+                <h4>Branch Address</h4>
+                <p>Plot No B28, Jai Nagar 1, Durga Estate Colony Chattarpur<br>Rudrapur - 263153, US Nagar, Uttarakhand</p>
+            </div>
+            
+            <div class="contact-card">
+                <h4>Contact Information</h4>
+                <p><strong>Email:</strong> greviasol@gmail.com<br>
+                   <strong>Phone:</strong> +91 9917944111<br>
+                   <strong>Website:</strong> www.greviasol.com</p>
+            </div>
+        </div>
+        
+        <div class="contact-map-container">
+            <div class="map-card">
+                <iframe 
+                    src="https://www.google.com/maps?q=5FWQ+2M Prempur loshgyani, Uttarakhand&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            
+            <div class="place-order-container">
+                <a href="contact/order-enquiry.html" class="cta-button-regular">Place Order Enquiry</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="assets/img/grevialogo.png" alt="Grevia Solutions">
+                        <h3>Grevia Solutions Pvt. Ltd.</h3>
+                    </div>
+                    <div class="footer-contact">
+                        <p>S/2 Vrinda, Raja Rani Vihar near Birla School<br>Haldwani - 263139, Dist. Nainital, Uttarakhand</p>
+                        <p><strong>greviasol@gmail.com</strong></p>
+                        <p><strong>+91 9917944111</strong></p>
+                        <p><a href="https://www.greviasol.com" target="_blank" rel="noopener">www.greviasol.com</a></p>
+                    </div>
+                    
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@greviasolutions" target="_blank" rel="noopener" aria-label="YouTube">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/grevia-solutions" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Our Solutions</h4>
+                    <ul>
+                        <li><a href="products/heat-exchangers.html">Heat Exchangers</a></li>
+                        <li><a href="products/cnc.html">CNC & Automation</a></li>
+                        <li><a href="products/lubricants.html">Industrial Lubricants</a></li>
+                        <li><a href="products/carbon.html">Carbon Emissions</a></li>
+                        <li><a href="products/lubricants.html">Specialty Chemicals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">Our Products</a></li>
+                        <li><a href="#career">Careers</a></li>
+                        <li><a href="Careers/job-application.html">Job Application</a></li>
+                        <li><a href="contact/order-enquiry.html">Place Order</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Grevia Solutions Pvt. Ltd. All Rights Reserved.</p>
+                </div>
+                <div class="footer-certifications">
+                    <p>ISO 9001:2015 Certified | MSME Registered</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Loading screen fade out
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('fade-out');
+            }, 2000);
+        });
+
+        // Header shrink on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+// Mobile Menu Toggle
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        mobileMenuBtn.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+            navLinks.classList.remove('show');
+            mobileMenuBtn.classList.remove('active');
+        }
+    });
+}
+
+// Mobile Dropdown Toggle
+const dropdownLinks = document.querySelectorAll('.nav-links > li > a');
+dropdownLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const dropdown = link.nextElementSibling;
+        const arrow = link.querySelector('.dropdown-arrow');
+        
+        if (dropdown && window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('show');
+            if (arrow) {
+                arrow.classList.toggle('rotated');
+            }
+        }
+    });
+});
+
+// Sub-dropdown Toggle (for Heat Exchangers, CNC, etc.)
+const subDropdownLinks = document.querySelectorAll('.dropdown > li > a');
+subDropdownLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const subDropdown = link.nextElementSibling;
+        
+        if (subDropdown && window.innerWidth <= 768) {
+            e.preventDefault();
+            subDropdown.classList.toggle('show');
+        }
+    });
+});
+</script>
+<script>
+// Mobile Menu Toggle
+const mobileNav = document.querySelector('.mobile-nav');
+const mobileOverlay = document.querySelector('.mobile-overlay');
+const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+
+function openMobileMenu() {
+    mobileNav.classList.add('show');
+    mobileOverlay.classList.add('show');
+    mobileMenuBtn.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeMobileMenu() {
+    mobileNav.classList.remove('show');
+    mobileOverlay.classList.remove('show');
+    mobileMenuBtn.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Event Listeners
+mobileMenuBtn.addEventListener('click', openMobileMenu);
+mobileCloseBtn.addEventListener('click', closeMobileMenu);
+mobileOverlay.addEventListener('click', closeMobileMenu);
+
+// Close menu when clicking on a link
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
+
+// Close menu on window resize (if switching to desktop)
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        closeMobileMenu();
+    }
+});
+</script>
+
+</body>
+</html>
