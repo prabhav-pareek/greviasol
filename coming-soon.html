@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Grevia Solutions Pvt. Ltd.</title>
+    <style>
+        :root {
+            --primary-blue: #0066ff;
+            --primary-red: #ff3366;
+            --gradient: linear-gradient(135deg, #0066ff, #ff3366);
+            --dark-bg: #121212;
+            --text-light: #e0e0e0;
+            --text-dark: #cccccc;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 600px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .contact-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-red);
+        }
+
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop class="background-video">
+        <source src="assets/img/hero-bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <img src="assets/img/grevialogo.png" alt="Grevia Solutions Logo" class="logo">
+        <h1>Something New is on the Horizon</h1>
+        <p>We're currently engineering a better experience for you. Our new website is launching soon, bringing innovative solutions and enhanced engineering machines.</p>
+        <div class="contact-info">
+            Stay tuned or contact us at <a href="mailto:greviasol@gmail.com">greviasol@gmail.com</a> for inquiries.
+        </div>
+    </div>
+
+</body>
+</html>
